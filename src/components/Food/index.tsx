@@ -18,11 +18,11 @@ type FProps = {
 type FoodProps = {
   food: FProps
   handleDelete: (id: number) => void
-  handleEditFood: (food: FProps) => void
+  handleEditFood: (id: number) => void
 }
 
 const Food: React.FC<FoodProps> = ({ food, handleDelete, handleEditFood }) => {
-  const [isAvailable, setAvailable] = useState(false)
+  const [isAvailable, setAvailable] = useState(food.available)
 
   async function handleToggleAvailable() {
     try {
@@ -54,7 +54,7 @@ const Food: React.FC<FoodProps> = ({ food, handleDelete, handleEditFood }) => {
           <button
             type="button"
             className="icon"
-            onClick={() => handleEditFood(food)}
+            onClick={() => handleEditFood(food.id)}
             data-testid={`edit-food-${food.id}`}
           >
             <FiEdit3 size={20} />

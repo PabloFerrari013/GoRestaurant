@@ -29,19 +29,22 @@ const ModalAddFood: React.FC<ModalAddFoodProps> = ({
 }) => {
   const formRef = useRef<FormHandles>(null)
 
-  const handleSubmit: SubmitHandler<FormData> = data => {
-    console.log('Teste')
+  const handleSubmit: SubmitHandler<FoodInterface> = data => {
+    handleAddFood({
+      id: data.id,
+      name: data.name,
+      description: data.description,
+      price: data.price,
+      image: data.image,
+      available: false
+    })
+
+    setIsOpen()
   }
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <Form
-        ref={formRef}
-        onSubmit={event => {
-          event.preventDefault()
-          console.log('teste')
-        }}
-      >
+      <Form ref={formRef} onSubmit={handleSubmit}>
         <h1>Novo Prato</h1>
         <Input name="image" placeholder="Cole o link aqui" />
 

@@ -7,7 +7,7 @@ import Input from '../Input'
 
 import React from 'react'
 
-import { FormHandles } from '@unform/core'
+import { FormHandles, SubmitHandler } from '@unform/core'
 
 interface FoodInterface {
   id: number
@@ -33,8 +33,8 @@ const ModalEditFood: React.FC<ModalEditFoodProps> = ({
 }) => {
   const formRef = useRef<FormHandles>(null)
 
-  function handleSubmit(data: FormDataEvent) {
-    // handleUpdateFood(data)
+  const handleSubmit: SubmitHandler<FoodInterface> = data => {
+    handleUpdateFood(data)
     setIsOpen()
   }
 

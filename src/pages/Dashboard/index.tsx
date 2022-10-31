@@ -21,7 +21,9 @@ interface Foods {
 }
 const Dashboard: React.FC = () => {
   const [foods, setFoods] = useState<FoodInterface[]>([])
-  const [modalIsOpen, setModal] = useState(false)
+  const [modalAddIsOpen, setModalAdd] = useState(false)
+  const [modalEditIsOpen, setModalEdit] = useState(false)
+  const [activeId, setActiveId] = useState(0)
 
   async function handleAddFood(food: FoodInterface) {
     try {
@@ -38,7 +40,7 @@ const Dashboard: React.FC = () => {
 
   async function handleUpdateFood(food: FoodInterface) {
     try {
-      const foodUpdated = await api.put(`/foods/${food.id}`, {
+      const foodUpdated = await api.put(`/foods/${activeId}`, {
         ...food,
         ...foods
       })
@@ -47,7 +49,7 @@ const Dashboard: React.FC = () => {
         f.id !== foodUpdated.data.id ? f : foodUpdated.data
       )
 
-      setFoods(foodsUpdated)
+      setFoods([...foodsUpdated])
     } catch (err) {
       console.log(err)
     }
@@ -61,9 +63,9 @@ const Dashboard: React.FC = () => {
     setFoods(foodsFiltered)
   }
 
-  function handleEditFood(food: FoodInterface) {
-    setModal(true)
-    setFoods([food])
+  function handleEditFood(id: number) {
+    setModalEdit(true)
+    setActiveId(id)
   }
 
   useEffect(() => {
@@ -82,17 +84,17 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <Header openModal={() => setModal(p => !p)} />
+      <Header openModal={() => setModalAdd(p => !p)} />
 
       <ModalAddFood
-        isOpen={modalIsOpen}
-        setIsOpen={() => setModal(p => !p)}
+        isOpen={modalAddIsOpen}
+        setIsOpen={() => setModalAdd(p => !p)}
         handleAddFood={handleAddFood}
       />
 
       <ModalEditFood
-        isOpen={modalIsOpen}
-        setIsOpen={() => setModal(p => !p)}
+        isOpen={modalEditIsOpen}
+        setIsOpen={() => setModalEdit(p => !p)}
         editingFood={setFoods}
         handleUpdateFood={handleUpdateFood}
       />
