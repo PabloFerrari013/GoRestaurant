@@ -1,11 +1,11 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   background: #c72828;
-  padding: 30px 3vw;
+  padding: 30px 0;
 
   header {
-    width: min(1280px, 100%);
+    width: 1280px;
     margin: 0 auto;
     padding: 0 0 160px;
     display: flex;
@@ -40,4 +40,4 @@ export const Container = styled.div`
       }
     }
   }
-`
+`;
