@@ -21,7 +21,7 @@ interface FoodInterface {
 type ModalEditFoodProps = {
   isOpen: boolean
   setIsOpen: () => void
-  editingFood: React.Dispatch<React.SetStateAction<FoodInterface[]>>
+  editingFood: FoodInterface | undefined
   handleUpdateFood: (data: FoodInterface) => void
 }
 

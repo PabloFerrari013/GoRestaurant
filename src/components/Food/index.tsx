@@ -6,7 +6,7 @@ import api from '../../services/api'
 
 import React from 'react'
 
-type FProps = {
+interface FoodInterface {
   id: number
   name: string
   description: string
@@ -16,9 +16,9 @@ type FProps = {
 }
 
 type FoodProps = {
-  food: FProps
+  food: FoodInterface
   handleDelete: (id: number) => void
-  handleEditFood: (id: number) => void
+  handleEditFood: (food: FoodInterface) => void
 }
 
 const Food: React.FC<FoodProps> = ({ food, handleDelete, handleEditFood }) => {
@@ -54,7 +54,7 @@ const Food: React.FC<FoodProps> = ({ food, handleDelete, handleEditFood }) => {
           <button
             type="button"
             className="icon"
-            onClick={() => handleEditFood(food.id)}
+            onClick={() => handleEditFood(food)}
             data-testid={`edit-food-${food.id}`}
           >
             <FiEdit3 size={20} />
