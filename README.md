@@ -1,4 +1,4 @@
-# DT-Money
+# GoRestaurant
 
 ## 🤔 About the project
 GoRestaurant is a website project for Italian food, made in order to train knowledge about programming. In it we can create, change or delete products
